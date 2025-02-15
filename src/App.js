@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import Papa from "papaparse";
+import { Analytics } from '@vercel/analytics/react';
 
 function App() {
   const [promoCodes, setPromoCodes] = useState([]);
@@ -61,6 +62,8 @@ function App() {
           </button>
         </div>
       )}
+
+      <Analytics />
     </div>
   );
 }
