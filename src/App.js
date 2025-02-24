@@ -7,6 +7,9 @@ function App() {
   const [selectedCode, setSelectedCode] = useState("");
   const [copySuccess, setCopySuccess] = useState(false);
 
+  const PLAY_STORE_URL =
+    "https://play.google.com/store/apps/details?id=com.blockerplus.blockerplus";
+
   // Load and parse CSV file
   useEffect(() => {
     const loadPromoCodes = async () => {
@@ -48,7 +51,24 @@ function App() {
 
   return (
     <div className="App" style={styles.container}>
-      <h1 style={styles.title}>Promo Code Generator</h1>
+      <h1 style={styles.title}>BlockerPlus Promo Code Generator</h1>
+
+      <div style={styles.description}>
+        <p>
+          Get your exclusive promo code for BlockerPlus Premium! 🎉
+          <br />
+          Limited availability - first come, first served.
+        </p>
+      </div>
+
+      <a
+        href={PLAY_STORE_URL}
+        target="_blank"
+        rel="noopener noreferrer"
+        style={styles.playStoreLink}
+      >
+        📱 Get it on Play Store
+      </a>
 
       <button onClick={generateCode} style={styles.generateButton}>
         Generate Code
@@ -59,21 +79,23 @@ function App() {
           <div style={styles.codeContainer}>
             <div style={styles.codeDisplay}>{selectedCode}</div>
             <button onClick={copyToClipboard} style={styles.copyButton}>
-              {copySuccess ? "Copied!" : "Copy Code"}
+              {copySuccess ? "Copied! ✅" : "Copy Code 📋"}
             </button>
           </div>
 
           <div style={styles.instructionsContainer}>
-            <h2 style={styles.instructionsTitle}>How to Redeem Your Code</h2>
+            <h2 style={styles.instructionsTitle}>📱 How to Redeem Your Code:</h2>
             <ol style={styles.instructionsList}>
-              <li>Open the BlockerPlus app on your device</li>
-              <li>Navigate to Premium Purchase Page</li>
-              <li>Select 12 months Plan</li>
-              <li>Start the checkout process</li>
-              <li>Look for the "Redeem" option</li>
-              <li>Enter your promo code</li>
-              <li>Complete the purchase process</li>
+              <li>Open the Google Play app</li>
+              <li>Tap your profile icon → Payments & subscriptions</li>
+              <li>Select "Redeem code"</li>
+              <li>Enter the code above</li>
+              <li>Open BlockerPlus app</li>
             </ol>
+            <div style={styles.note}>
+              ⚠️ Note: If premium features don't activate immediately, try clearing
+              the app cache and restarting the app.
+            </div>
           </div>
         </>
       )}
@@ -91,20 +113,50 @@ const styles = {
     padding: "2rem",
     minHeight: "100vh",
     backgroundColor: "#f5f5f5",
+    fontFamily: "-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Arial",
   },
   title: {
-    color: "#333",
+    color: "#1a1a1a",
+    marginBottom: "1rem",
+    textAlign: "center",
+  },
+  description: {
+    textAlign: "center",
     marginBottom: "2rem",
+    color: "#444",
+    fontSize: "1.1rem",
+    lineHeight: "1.5",
+  },
+  playStoreLink: {
+    padding: "0.8rem 1.5rem",
+    backgroundColor: "#ffffff",
+    color: "#0079d3",
+    textDecoration: "none",
+    borderRadius: "25px",
+    border: "2px solid #0079d3",
+    fontWeight: "bold",
+    transition: "all 0.2s",
+    fontSize: "1rem",
+    marginBottom: "2rem",
+    ":hover": {
+      backgroundColor: "#0079d3",
+      color: "#ffffff",
+    },
   },
   generateButton: {
     padding: "1rem 2rem",
     fontSize: "1.1rem",
-    backgroundColor: "#007bff",
+    backgroundColor: "#0079d3",
     color: "white",
     border: "none",
-    borderRadius: "5px",
+    borderRadius: "25px",
     cursor: "pointer",
     marginBottom: "2rem",
+    fontWeight: "bold",
+    transition: "background-color 0.2s",
+    ":hover": {
+      backgroundColor: "#005fa3",
+    },
   },
   codeContainer: {
     display: "flex",
@@ -112,40 +164,57 @@ const styles = {
     alignItems: "center",
     gap: "1rem",
     marginBottom: "2rem",
+    width: "100%",
+    maxWidth: "400px",
   },
   codeDisplay: {
     padding: "1rem 2rem",
     backgroundColor: "white",
-    border: "2px dashed #007bff",
-    borderRadius: "5px",
+    border: "2px dashed #0079d3",
+    borderRadius: "8px",
     fontSize: "1.2rem",
     fontWeight: "bold",
+    width: "100%",
+    textAlign: "center",
   },
   copyButton: {
-    padding: "0.5rem 1rem",
+    padding: "0.8rem 1.5rem",
     backgroundColor: "#28a745",
     color: "white",
     border: "none",
-    borderRadius: "5px",
+    borderRadius: "25px",
     cursor: "pointer",
+    fontWeight: "bold",
+    transition: "background-color 0.2s",
+    ":hover": {
+      backgroundColor: "#218838",
+    },
   },
   instructionsContainer: {
     maxWidth: "600px",
     width: "100%",
     backgroundColor: "white",
     padding: "2rem",
-    borderRadius: "10px",
-    boxShadow: "0 2px 4px rgba(0,0,0,0.1)",
+    borderRadius: "12px",
+    boxShadow: "0 2px 8px rgba(0,0,0,0.1)",
   },
   instructionsTitle: {
-    color: "#333",
-    fontSize: "1.5rem",
+    color: "#1a1a1a",
+    fontSize: "1.3rem",
     marginBottom: "1rem",
   },
   instructionsList: {
     paddingLeft: "1.5rem",
-    lineHeight: "1.6",
-    color: "#555",
+    lineHeight: "1.8",
+    color: "#444",
+    marginBottom: "1.5rem",
+  },
+  note: {
+    backgroundColor: "#fff3cd",
+    padding: "1rem",
+    borderRadius: "8px",
+    color: "#856404",
+    fontSize: "0.9rem",
   },
 };
 
