@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import Papa from "papaparse";
-import { Analytics } from '@vercel/analytics/react';
+import { Analytics } from "@vercel/analytics/react";
 
 function App() {
   const [promoCodes, setPromoCodes] = useState([]);
@@ -13,7 +13,7 @@ function App() {
       try {
         const response = await fetch("/promocodes.csv");
         const csvText = await response.text();
-        
+
         Papa.parse(csvText, {
           header: true,
           complete: (results) => {
@@ -49,18 +49,33 @@ function App() {
   return (
     <div className="App" style={styles.container}>
       <h1 style={styles.title}>Promo Code Generator</h1>
-      
+
       <button onClick={generateCode} style={styles.generateButton}>
         Generate Code
       </button>
 
       {selectedCode && (
-        <div style={styles.codeContainer}>
-          <div style={styles.codeDisplay}>{selectedCode}</div>
-          <button onClick={copyToClipboard} style={styles.copyButton}>
-            {copySuccess ? "Copied!" : "Copy Code"}
-          </button>
-        </div>
+        <>
+          <div style={styles.codeContainer}>
+            <div style={styles.codeDisplay}>{selectedCode}</div>
+            <button onClick={copyToClipboard} style={styles.copyButton}>
+              {copySuccess ? "Copied!" : "Copy Code"}
+            </button>
+          </div>
+
+          <div style={styles.instructionsContainer}>
+            <h2 style={styles.instructionsTitle}>How to Redeem Your Code</h2>
+            <ol style={styles.instructionsList}>
+              <li>Open the BlockerPlus app on your device</li>
+              <li>Navigate to Premium Purchase Page</li>
+              <li>Select 12 months Plan</li>
+              <li>Start the checkout process</li>
+              <li>Look for the "Redeem" option</li>
+              <li>Enter your promo code</li>
+              <li>Complete the purchase process</li>
+            </ol>
+          </div>
+        </>
       )}
 
       <Analytics />
@@ -96,6 +111,7 @@ const styles = {
     flexDirection: "column",
     alignItems: "center",
     gap: "1rem",
+    marginBottom: "2rem",
   },
   codeDisplay: {
     padding: "1rem 2rem",
@@ -112,6 +128,24 @@ const styles = {
     border: "none",
     borderRadius: "5px",
     cursor: "pointer",
+  },
+  instructionsContainer: {
+    maxWidth: "600px",
+    width: "100%",
+    backgroundColor: "white",
+    padding: "2rem",
+    borderRadius: "10px",
+    boxShadow: "0 2px 4px rgba(0,0,0,0.1)",
+  },
+  instructionsTitle: {
+    color: "#333",
+    fontSize: "1.5rem",
+    marginBottom: "1rem",
+  },
+  instructionsList: {
+    paddingLeft: "1.5rem",
+    lineHeight: "1.6",
+    color: "#555",
   },
 };
 
